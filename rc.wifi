@@ -1,0 +1,63 @@
+#!/system/bin/sh
+
+load_libertas()
+{
+	insmod /system/bin/libertas/libertas.ko
+#	insmod /system/bin/libertas/libertas_sdio.ko
+
+        #
+    	# ISEE Wiki
+    	#
+    	# By default the WIFI-BT module is not configured for single antenna,
+    	# so you need to configure this, set registers settings as follows:
+    	#
+    	# Register offset   Register Name           8686 Bx
+    	# 0x8000_A58C       BT Switch Control       0x40865
+    	# 0x8000_A5A0       3/4W BCA mode config    0xD24D
+    	# 0x8000_A5F0       BCA WLAN modes          0xA027181C
+   	#
+#    	echo "0xa58c 0x40865"    > /sys/kernel/debug/lbs_wireless/wlan0/registers/wrmac
+#    	echo "0xa5a0 0xd24d"     > /sys/kernel/debug/lbs_wireless/wlan0/registers/wrmac
+#    	echo "0xa5f0 0xa027181c" > /sys/kernel/debug/lbs_wireless/wlan0/registers/wrmac
+
+	# Let WiFi part know that the drivers are already loaded
+#	setprop wifi.interface "wlan0"
+#	setprop wlan.driver.status ok
+
+	echo "Loaded Libertas WiFi modules"
+
+	return 0;
+}
+
+unload_libertas()
+{
+if rmmod libertas_sdio; then :; else return 1; fi
+if rmmod libertas; then :; else return 1; fi
+	echo "Unloaded Libertas WiFi modules."
+	return 0;
+}
+
+#
+# Deal with the type of invocation we get.
+#
+case "$1" in
+"start")
+	load_libertas
+	;;
+stop)
+	if ! unload_libertas; then
+		echo "Couldn't unload modules" >&2;
+	fi
+	;;
+reload|restart)
+	if unload_libertas; then
+		load_libertas
+	else
+		echo "Couldn't unload modules" >&2;
+	fi
+	;;
+*)
+	echo "$0: unknown argument $1." >&2;
+	;;
+esac
+
