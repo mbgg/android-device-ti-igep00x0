@@ -34,6 +34,10 @@ PRODUCT_COPY_FILES += \
 	device/ti/igep00x0/libertas/sd8686.bin:system/etc/firmware/sd8686.bin \
 	device/ti/igep00x0/libertas/sd8686_helper.bin:system/etc/firmware/sd8686_helper.bin
 
+# Tochscreen definition
+PRODUCT_COPY_FILES += \
+	device/ti/igep00x0/ADS7846_Tochscreen.idc:system/usr/idc/ADS7846_Touchscreen.idc
+
 # Bluetooth
 #PRODUCT_COPY_FILES += \
 #	device/ti/igep00x0/rc.bt:system/bin/rc.bt \
@@ -65,9 +69,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	libaudioutils
 
-#TODO
 PRODUCT_PACKAGES += \
-        audio.primary.beagleboard \
+        audio.primary.igep00x0 \
         tinycap \
         tinymix \
         tinyplay
@@ -82,6 +85,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	make_ext4fs
 
+PRODUCT_PACKAGES += \
+	camera.omap3
+
+# FileManager Application
+PRODUCT_PACKAGES += \
+	FileManager-1.1.6
+
 $(call inherit-product, frameworks/base/build/tablet-dalvik-heap.mk)
 $(call inherit-product-if-exists, hardware/ti/wlan/mac80211/firmware/wl12xx_wlan_fw_products.mk)
-#$(call inherit-product-if-exists, hardware/ti/wpan/wl12xx-bluetooth/wl12xx_bt_products.mk)
+

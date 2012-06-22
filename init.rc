@@ -219,6 +219,9 @@ on boot
 
     mount debugfs none /sys/kernel/debug
 
+# Using landscape lcd
+    setprop lcd.landscape true
+
 # Memory management.  Basic kernel parameters, and allow the high
 # level system server to be able to adjust the kernel OOM driver
 # paramters to match how it is managing things.
