@@ -36,7 +36,7 @@ PRODUCT_COPY_FILES += \
 
 # Tochscreen definition
 PRODUCT_COPY_FILES += \
-	device/ti/igep00x0/ADS7846_Tochscreen.idc:system/usr/idc/ADS7846_Touchscreen.idc
+	device/ti/igep00x0/ADS7846_Touchscreen.idc:system/usr/idc/ADS7846_Touchscreen.idc
 
 # Bluetooth
 #PRODUCT_COPY_FILES += \
