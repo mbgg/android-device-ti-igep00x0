@@ -17,6 +17,12 @@
 # These two variables are set first, so they can be overridden
 # by BoardConfigVendor.mk
 #BOARD_USES_GENERIC_AUDIO := true
+BOARD_USES_GENERIC_AUDIO := false
+BOARD_USES_ALSA_AUDIO := true
+BUILD_WITH_ALSA_UTILS := false
+
+BUILD_OPENCORE_COMMON := true
+
 USE_CAMERA_STUB := true
 BOARD_EGL_CFG := device/ti/igep00x0/egl.cfg
 
